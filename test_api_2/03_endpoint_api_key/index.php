@@ -11,7 +11,7 @@ $valid_keys = [
 
 // check if the api_key header is present
 $headers = getallheaders();
-if(!key_exists('api_key', $headers)){
+if(!key_exists('Api-Key', $headers)){
     $res['status'] = 'error';
     $res['message'] = 'Acesso inválido.';
     $res['time_response'] = time();
@@ -20,7 +20,7 @@ if(!key_exists('api_key', $headers)){
 }
 
 // check if the api_key is valid in the registered clients
-if(!in_array($headers['api_key'], $valid_keys)){
+if(!in_array($headers['Api-Key'], $valid_keys)){
     $res['status'] = 'error';
     $res['message'] = 'Acesso inválido. Cliente desconhecido.';
     $res['time_response'] = time();
@@ -28,8 +28,8 @@ if(!in_array($headers['api_key'], $valid_keys)){
     exit;
 }
 
-$api_key = $headers['api_key'];
-$client = array_search($headers['api_key'], $valid_keys);
+$api_key = $headers['Api-Key'];
+$client = array_search($headers['Api-Key'], $valid_keys);
 
 $res['status'] = 'success';
 $res['message'] = 'Acesso a um endpoint com autenticação API Key. Cliente: ' . $client;
